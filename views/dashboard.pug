@@ -1,0 +1,8 @@
+extend layout
+
+block content
+  div
+    h1 DASHBOARD
+    p #{currentUser.memberStatus}
+    h1 #{currentUser.name.firstName} #{currentUser.name.lastName}
+    h2 #{currentUser.username}

@@ -1,13 +1,9 @@
 extend layout
 
 block content
-  if(user)
-    h1 Welcome Back!
-    a(href="/log-out") Log Out
-  else
-    form(action="/sign-in" method='POST')
-      label(for="username") Username
-      input(type="text" id='username' name='username')
-      label(for="password") Password
-      input(type="password" id='password' name='password')
-      button(type="submit") Done
+  form(action="/sign-in" method='POST')
+    label(for="username") Username
+    input(type="text" id='username' name='username')
+    label(for="password") Password
+    input(type="password" id='password' name='password')
+    button(type="submit") Done

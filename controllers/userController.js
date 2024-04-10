@@ -2,12 +2,49 @@ const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const he = require('he');
+const { format } = require('date-fns');
 const passport = require('../user-authentication/passport-config');
 const User = require('../models/user');
+const Message = require('../models/message');
 
-exports.membership_get = asyncHandler(async (req, res, next) => {
-  res.render('membership_form');
+exports.home_page_get = asyncHandler(async (req, res, next) => {
+  const messages = await Message.find();
+  const currentDate = new Date();
+  const formattedDate = format(currentDate, 'EEEE dd MMMM yyyy HH:mm');
+  console.log('date', formattedDate);
+
+  res.render('index', { messages });
 });
+
+exports.home_page_post = [
+
+  body('title', 'Title must not be empty.').trim().isLength({ min: 1, max: 30 }).escape(),
+  body('message', 'Message must not be empty.').trim().isLength({ min: 1 }).escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorsMessages = errors.array().map((error) => error.msg);
+      res.render('error', { error: errorsMessages });
+    } else {
+      try {
+        const currentDate = new Date();
+        const formattedDate = format(currentDate, 'EEEE dd MMMM yyyy HH:mm');
+        const message = new Message({
+          userId: req.user.id,
+          title: req.user.username,
+          timestamp: formattedDate,
+          text: he.decode(req.body.message),
+        });
+        await message.save();
+        res.redirect('/');
+      } catch (error) {
+        console.error('An error occurred while processing the request:', error);
+        res.status(500).send('An error occurred while processing the request.');
+      }
+    }
+  }),
+];
 
 exports.sign_up_form_get = asyncHandler(async (req, res, next) => {
   res.render('sign_up_form');
@@ -61,12 +98,8 @@ exports.sign_in_form_get = asyncHandler(async (req, res, next) => {
   res.render('sign_in_form');
 });
 
-// exports.sign_in_form_get = asyncHandler(async (req, res, next) => {
-//   res.render('sign_in_form', { user: req.user });
-// });
-
 exports.sign_in_form_post = passport.authenticate('local', {
-  successRedirect: '/sign-in',
+  successRedirect: '/dashboard',
   failureRedirect: '/',
 });
 
@@ -77,4 +110,12 @@ exports.log_out_get = asyncHandler(async (req, res, next) => {
     }
     res.redirect('/');
   });
+});
+
+exports.dashboard_get = asyncHandler(async (req, res, next) => {
+  res.render('dashboard');
+});
+
+exports.membership_get = asyncHandler(async (req, res, next) => {
+  res.render('membership_form');
 });

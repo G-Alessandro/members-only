@@ -1,12 +1,27 @@
 extends layout
 
 block content
-  div(class='top-bar')
-    a(href='/membership') Become A Member
-    a(href="/") Home
-    if(user)
-      a(href="dashboard") Dashboard
-      a(href="/log-out") Log Out
+  div
+    if (currentUser)
+
+      form(action="" method='post')
+      
+        label(for="title") Title:
+        input(type="text" id='title' name='title' minLength='1' maxLength='30' required)
+
+        label(for="message") Message:
+        textarea(name="message" cols="30" rows="10" minLength='1' required)
+
+        button(type="submit") Create A New Message
+
     else
-      a(href="/sign-in") Sign In
-      a(href="/sign-up") Sign Up
+      a(href="/sign-in") Log In to be able to write a message
+
+    div
+      each message in messages 
+        div
+          div
+            h2 #{message.title}
+
+
+
