@@ -1,0 +1,21 @@
+extend layout
+
+block content
+  form(action="" method="POST")
+
+    label(for="first-name") First Name
+    input(type="text" id="first-name" name="first-name" minLength='1' maxLength='30' required)
+
+    label(for="last-name") Last Name
+    input(type="text" id="last-name" name="last-name" minLength='1' maxLength='30' required)
+
+    label(for="username") Username
+    input(type="text" id="username" name="username" minLength='1' maxLength='100' required)
+
+    label(for="password") Password
+    input(type="password" id="password" name="password" minLength='8' maxLength='16' required)
+
+    label(for="confirm-password") Confirm Password
+    input(type="password" id="confirm-password" name="confirm-password" minLength='8' maxLength='16' required)
+
+    button(type="submit") Done
