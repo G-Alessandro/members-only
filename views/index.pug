@@ -20,8 +20,14 @@ block content
     div
       each message in messages 
         div
+          if(currentUser && currentUser.memberStatus)
+            div
+              h2 Author: #{currentUser.username}
+              p Date: #{message.timestamp}
           div
             h2 #{message.title}
+          div
+            p #{message.text}
 
 
 

@@ -8,7 +8,9 @@ router.get('/', user_controller.home_page_get);
 
 router.post('/', user_controller.home_page_post);
 
-router.get('/membership', user_controller.membership_get);
+router.get('/membership', user_controller.membership_form_get);
+
+router.post('/membership', user_controller.membership_form_post);
 
 router.get('/sign-in', user_controller.sign_in_form_get);
 

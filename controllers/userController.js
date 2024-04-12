@@ -6,14 +6,16 @@ const { format } = require('date-fns');
 const passport = require('../user-authentication/passport-config');
 const User = require('../models/user');
 const Message = require('../models/message');
+require('dotenv').config();
 
 exports.home_page_get = asyncHandler(async (req, res, next) => {
-  const messages = await Message.find();
-  const currentDate = new Date();
-  const formattedDate = format(currentDate, 'EEEE dd MMMM yyyy HH:mm');
-  console.log('date', formattedDate);
+  const messages = await Message.find().sort({ timestamp: -1 });
+  const formattedMessages = messages.map((message) => ({
+    ...message.toObject(),
+    timestamp: format(new Date(message.timestamp), 'EEEE dd MMMM yyyy HH:mm'),
+  }));
 
-  res.render('index', { messages });
+  res.render('index', { messages: formattedMessages });
 });
 
 exports.home_page_post = [
@@ -28,12 +30,10 @@ exports.home_page_post = [
       res.render('error', { error: errorsMessages });
     } else {
       try {
-        const currentDate = new Date();
-        const formattedDate = format(currentDate, 'EEEE dd MMMM yyyy HH:mm');
         const message = new Message({
           userId: req.user.id,
           title: req.user.username,
-          timestamp: formattedDate,
+          timestamp: new Date(),
           text: he.decode(req.body.message),
         });
         await message.save();
@@ -113,9 +113,23 @@ exports.log_out_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.dashboard_get = asyncHandler(async (req, res, next) => {
-  res.render('dashboard');
+  const userMessages = await Message.find({ userId: req.user.id }).sort({ timestamp: -1 });
+  const formattedMessages = userMessages.map((message) => ({
+    ...message.toObject(),
+    timestamp: format(new Date(message.timestamp), 'EEEE dd MMMM yyyy HH:mm'),
+  }));
+  res.render('dashboard', { userMessages: formattedMessages });
 });
 
-exports.membership_get = asyncHandler(async (req, res, next) => {
+exports.membership_form_get = asyncHandler(async (req, res, next) => {
   res.render('membership_form');
+});
+
+exports.membership_form_post = asyncHandler(async (req, res, next) => {
+  if (req.body['secret-passcode'] === process.env.SECRET_PASSCODE) {
+    await User.findOneAndUpdate({ _id: req.user.id }, { memberStatus: true });
+    res.redirect('/dashboard');
+  } else {
+    res.redirect('/error');
+  }
 });

@@ -1,7 +1,18 @@
 extend layout
 
 block content
-  form(action="" method='post') 
-    label(for="secret-passcode") Secret Passcode
-    input(type="text" id='secret-passcode' name='secret-passcode')
-    button(type="submit") Done
+
+  if (!currentUser)
+  
+    a(href="/sign-in") Log In to be able to become a member 
+
+  else 
+    if(currentUser.memberStatus)
+
+      h1 Good news you are already a member!
+
+    else
+      form(action="" method='post') 
+        label(for="secret-passcode") Secret Passcode
+        input(type="text" id='secret-passcode' name='secret-passcode')
+        button(type="submit") Done

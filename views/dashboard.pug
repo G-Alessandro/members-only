@@ -1,8 +1,26 @@
 extend layout
 
 block content
+  h1 DASHBOARD
   div
-    h1 DASHBOARD
-    p #{currentUser.memberStatus}
-    h1 #{currentUser.name.firstName} #{currentUser.name.lastName}
-    h2 #{currentUser.username}
+    div
+      form(action="" method='post')
+        
+        label(for="title") Title:
+        input(type="text" id='title' name='title' minLength='1' maxLength='30' required)
+
+        label(for="message") Message:
+        textarea(name="message" cols="30" rows="10" minLength='1' required)
+
+        button(type="submit") Create A New Message
+
+    div
+      each message in userMessages 
+        div
+          div
+            h2 Author: #{currentUser.username}
+            p Date: #{message.timestamp}
+          div
+            h2 #{message.title}
+          div
+            p #{message.text}
