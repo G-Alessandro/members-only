@@ -7,7 +7,7 @@ block content
       form(action="" method='post')
       
         label(for="title") Title:
-        input(type="text" id='title' name='title' minLength='1' maxLength='30' required)
+        input(type="text" id='title' name='title' minLength='1' maxLength='30' pattern="[a-zA-Z0-9]+" required)
 
         label(for="message") Message:
         textarea(name="message" cols="30" rows="10" minLength='1' required)
@@ -25,7 +25,7 @@ block content
               h2 Author: #{currentUser.username}
               p Date: #{message.timestamp}
           div
-            h2 #{message.title}
+            h2 Title: #{message.title}
           div
             p #{message.text}
 

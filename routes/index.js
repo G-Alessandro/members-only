@@ -22,6 +22,10 @@ router.post('/sign-up', user_controller.sign_up_form_post);
 
 router.get('/dashboard', user_controller.dashboard_get);
 
+router.post('/dashboard', user_controller.dashboard_post);
+
 router.get('/log-out', user_controller.log_out_get);
+
+router.get('/delete-message', user_controller.delete_message_get);
 
 module.exports = router;

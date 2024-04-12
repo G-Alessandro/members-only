@@ -32,7 +32,7 @@ exports.home_page_post = [
       try {
         const message = new Message({
           userId: req.user.id,
-          title: req.user.username,
+          title: he.decode(req.body.title),
           timestamp: new Date(),
           text: he.decode(req.body.message),
         });
@@ -120,6 +120,34 @@ exports.dashboard_get = asyncHandler(async (req, res, next) => {
   }));
   res.render('dashboard', { userMessages: formattedMessages });
 });
+
+exports.dashboard_post = [
+
+  body('title', 'Title must not be empty.').trim().isLength({ min: 1, max: 30 }).escape(),
+  body('message', 'Message must not be empty.').trim().isLength({ min: 1 }).escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorsMessages = errors.array().map((error) => error.msg);
+      res.render('error', { error: errorsMessages });
+    } else {
+      try {
+        const message = new Message({
+          userId: req.user.id,
+          title: he.decode(req.body.title),
+          timestamp: new Date(),
+          text: he.decode(req.body.message),
+        });
+        await message.save();
+        res.redirect('/dashboard');
+      } catch (error) {
+        console.error('An error occurred while processing the request:', error);
+        res.status(500).send('An error occurred while processing the request.');
+      }
+    }
+  }),
+];
 
 exports.membership_form_get = asyncHandler(async (req, res, next) => {
   res.render('membership_form');
