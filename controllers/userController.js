@@ -9,7 +9,7 @@ const Message = require('../models/message');
 require('dotenv').config();
 
 exports.home_page_get = asyncHandler(async (req, res, next) => {
-  const messages = await Message.find().sort({ timestamp: -1 });
+  const messages = await Message.find().sort({ timestamp: -1 }).exec();
   const formattedMessages = messages.map((message) => ({
     ...message.toObject(),
     timestamp: format(new Date(message.timestamp), 'EEEE dd MMMM yyyy HH:mm'),
@@ -56,7 +56,7 @@ exports.sign_up_form_post = [
   body('last-name', 'Last Name must not be empty.').trim().isLength({ min: 1, max: 30 }).escape(),
   body('username', 'Username must not be empty.').trim().isLength({ min: 1, max: 100 }).escape()
     .custom(async (value) => {
-      const user = await User.findOne({ username: value });
+      const user = await User.findOne({ username: value }).exec();
       if (user) {
         throw new Error('Username already in use');
       }
@@ -113,7 +113,7 @@ exports.log_out_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.dashboard_get = asyncHandler(async (req, res, next) => {
-  const userMessages = await Message.find({ userId: req.user.id }).sort({ timestamp: -1 });
+  const userMessages = await Message.find({ userId: req.user.id }).sort({ timestamp: -1 }).exec();
   const formattedMessages = userMessages.map((message) => ({
     ...message.toObject(),
     timestamp: format(new Date(message.timestamp), 'EEEE dd MMMM yyyy HH:mm'),
@@ -149,13 +149,18 @@ exports.dashboard_post = [
   }),
 ];
 
+exports.delete_message_get = asyncHandler(async (req, res, next) => {
+  await Message.findByIdAndDelete(req.params.messageId);
+  res.redirect('/dashboard');
+});
+
 exports.membership_form_get = asyncHandler(async (req, res, next) => {
   res.render('membership_form');
 });
 
 exports.membership_form_post = asyncHandler(async (req, res, next) => {
   if (req.body['secret-passcode'] === process.env.SECRET_PASSCODE) {
-    await User.findOneAndUpdate({ _id: req.user.id }, { memberStatus: true });
+    await User.findOneAndUpdate({ _id: req.user.id }, { memberStatus: true }).exec();
     res.redirect('/dashboard');
   } else {
     res.redirect('/error');
