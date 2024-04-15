@@ -155,8 +155,15 @@ exports.dashboard_post = [
 ];
 
 exports.delete_message_get = asyncHandler(async (req, res, next) => {
+  const { fromPage } = req.query;
+
   await Message.findByIdAndDelete(req.params.messageId);
-  res.redirect('/dashboard');
+
+  if (fromPage === 'dashboard') {
+    res.redirect('/dashboard');
+  } else {
+    res.redirect('/');
+  }
 });
 
 exports.membership_form_get = asyncHandler(async (req, res, next) => {
