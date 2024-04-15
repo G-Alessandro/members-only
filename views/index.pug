@@ -28,6 +28,8 @@ block content
             h2 Title: #{message.title}
           div
             p #{message.text}
+        if(currentUser.isAdmin) 
+          a(href=`/delete-message/${message._id}`) Delete
 
 
 

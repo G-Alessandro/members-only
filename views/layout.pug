@@ -8,8 +8,9 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
   body
     div(class='top-bar')
-      a(href='/membership') Become A Member
       a(href="/") Home
+      a(href='/membership') Become A Member
+      a(href='/become-admin') Become An Admin
       if(currentUser)
         a(href="dashboard") Dashboard
         a(href="/log-out") Log Out

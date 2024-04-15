@@ -8,6 +8,11 @@ const User = require('../models/user');
 const Message = require('../models/message');
 require('dotenv').config();
 
+exports.error_get = asyncHandler(async (req, res, next) => {
+  const errorMessage = req.query.message;
+  res.render('error', { error: errorMessage });
+});
+
 exports.home_page_get = asyncHandler(async (req, res, next) => {
   const messages = await Message.find().sort({ timestamp: -1 }).exec();
   const formattedMessages = messages.map((message) => ({
@@ -85,7 +90,7 @@ exports.sign_up_form_post = [
         user.password = await bcrypt.hash(user.password, 10);
 
         await user.save();
-        res.redirect('/');
+        res.redirect('/sign-in');
       } catch (error) {
         console.error('An error occurred while processing the request:', error);
         res.status(500).send('An error occurred while processing the request.');
@@ -158,11 +163,31 @@ exports.membership_form_get = asyncHandler(async (req, res, next) => {
   res.render('membership_form');
 });
 
-exports.membership_form_post = asyncHandler(async (req, res, next) => {
-  if (req.body['secret-passcode'] === process.env.SECRET_PASSCODE) {
-    await User.findOneAndUpdate({ _id: req.user.id }, { memberStatus: true }).exec();
-    res.redirect('/dashboard');
-  } else {
-    res.redirect('/error');
-  }
+exports.membership_form_post = [
+  body('secret-passcode').trim().escape(),
+  asyncHandler(async (req, res, next) => {
+    const secretPasscode = req.body['secret-passcode'].toLowerCase();
+    if (secretPasscode === process.env.SECRET_PASSCODE) {
+      await User.findOneAndUpdate({ _id: req.user.id }, { memberStatus: true }).exec();
+      res.redirect('/dashboard');
+    } else {
+      res.redirect('/error?message=Wrong%20Passcode');
+    }
+  }),
+];
+exports.become_admin_form_get = asyncHandler(async (req, res, next) => {
+  res.render('become_admin_form');
 });
+
+exports.become_admin_form_post = [
+  body('admin-secret-passcode').trim().escape(),
+  asyncHandler(async (req, res, next) => {
+    const adminSecretPasscode = req.body['admin-secret-passcode'].toLowerCase();
+    if (adminSecretPasscode === process.env.ADMIN_PASSCODE) {
+      await User.findOneAndUpdate({ _id: req.user.id }, { isAdmin: true }).exec();
+      res.redirect('/dashboard');
+    } else {
+      res.redirect('/error?message=Wrong%20Passcode');
+    }
+  }),
+];

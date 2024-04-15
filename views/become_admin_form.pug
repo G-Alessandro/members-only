@@ -1,0 +1,19 @@
+extend layout
+
+block content
+
+  if (!currentUser)
+  
+    a(href="/sign-in") Log In to be able to become an Admin
+
+  else 
+    if(currentUser.isAdmin)
+
+      h1 Good news, you are already an Admin!
+
+    else
+      h2 Want to become an Admin?
+      h2 Guess the passcode and you will become one!
+      form(action="" method='post') 
+        input(type="text" id='admin-secret-passcode' name='admin-secret-passcode' required)
+        button(type="submit") Done

@@ -12,6 +12,10 @@ router.get('/membership', user_controller.membership_form_get);
 
 router.post('/membership', user_controller.membership_form_post);
 
+router.get('/become-admin', user_controller.become_admin_form_get);
+
+router.post('/become-admin', user_controller.become_admin_form_post);
+
 router.get('/sign-in', user_controller.sign_in_form_get);
 
 router.post('/sign-in', user_controller.sign_in_form_post);
@@ -27,5 +31,7 @@ router.post('/dashboard', user_controller.dashboard_post);
 router.get('/log-out', user_controller.log_out_get);
 
 router.get('/delete-message/:messageId', user_controller.delete_message_get);
+
+router.get('/error', user_controller.error_get);
 
 module.exports = router;

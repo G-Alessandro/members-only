@@ -9,10 +9,12 @@ block content
   else 
     if(currentUser.memberStatus)
 
-      h1 Good news you are already a member!
+      h1 Good news, you are already a member!
 
     else
+      h2 Want to become a member ?
+      h2 Answer the following riddle :
+      h3 Who are man's best friends?
       form(action="" method='post') 
-        label(for="secret-passcode") Secret Passcode
-        input(type="text" id='secret-passcode' name='secret-passcode')
+        input(type="text" id='secret-passcode' name='secret-passcode' required)
         button(type="submit") Done
