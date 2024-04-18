@@ -127,7 +127,7 @@
   border-radius: 5px;
 }
 
-.delete-message-container>a {
+.delete-message-container>p {
   color: white;
   font-size: 18px;
   font-weight: 700;

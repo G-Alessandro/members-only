@@ -106,7 +106,7 @@ exports.sign_in_form_get = asyncHandler(async (req, res, next) => {
 
 exports.sign_in_form_post = passport.authenticate('local', {
   successRedirect: '/dashboard',
-  failureRedirect: '/',
+  failureRedirect: '/error',
 });
 
 exports.log_out_get = asyncHandler(async (req, res, next) => {

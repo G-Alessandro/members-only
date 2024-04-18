@@ -137,7 +137,7 @@
   border-radius: 5px;
 }
 
-.dashboard-delete-message-container>a {
+.dashboard-delete-message-container>p {
   color: white;
   font-size: 18px;
   font-weight: 700;

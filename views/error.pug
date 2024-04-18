@@ -1,4 +1,4 @@
 extends layout
 
 block content
-  h1= error
+  h1(class='error')= error || 'Incorrect password / username or account does not exist!'

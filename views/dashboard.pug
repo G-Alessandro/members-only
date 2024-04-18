@@ -41,6 +41,6 @@ block content
               h2(class='dashboard-message-title') Title: #{message.title}
             div
               p #{message.text}
-            div(class='dashboard-delete-message-container')
-              a(href=`/delete-message/${message._id}?fromPage=dashboard`) Delete
+            a(href=`/delete-message/${message._id}?fromPage=dashboard` class='dashboard-delete-message-container') 
+              p Delete
               img(src="images/trash-can.svg", alt="trash can")

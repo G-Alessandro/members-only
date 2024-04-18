@@ -30,6 +30,6 @@ block content
             div
               p #{message.text}
             if(currentUser && currentUser.isAdmin || currentUser && currentUser.id === message.userId)
-              div(class='delete-message-container')
-                a(href=`/delete-message/${message._id}?fromPage=home`) Delete
+              a(href=`/delete-message/${message._id}?fromPage=home` class='delete-message-container') 
+                p Delete
                 img(src="images/trash-can.svg", alt="trash can")

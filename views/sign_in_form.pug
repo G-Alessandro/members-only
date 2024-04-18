@@ -5,7 +5,7 @@ block content
     h1 Sign-in
     form(action="/sign-in" method='POST' class='sign-in-form')
       label(for="username") Username
-      input(type="text" id='username' name='username' autocomplete="on")
+      input(type="text" id='username' name='username' minLength='1' maxLength='30' autocomplete="on" required)
       label(for="password") Password
-      input(type="password" id='password' name='password' autocomplete="off")
+      input(type="password" id='password' minLength='8' maxLength='16' name='password' autocomplete="off" required)
       button(type="submit") Done
