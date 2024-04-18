@@ -8,7 +8,7 @@ block content
           form(action="" method='post')
             div 
               label(for="title") Title:
-              input(type="text" id='title' name='title' minLength='1' maxLength='30' pattern="[a-zA-Z0-9]+" required)
+              input(type="text" id='title' name='title' minLength='1' maxLength='30' required)
             div 
               label(for="message") Message:
               textarea(name="message" cols="30" rows="6" minLength='1' required)
@@ -23,7 +23,7 @@ block content
           div(class='message')
             if(currentUser && currentUser.memberStatus || currentUser && currentUser.isAdmin || currentUser && currentUser.id === message.userId)
               div
-                h2 Author: #{message.username}
+                h2 Author: #{message.author}
                 p(class='message-date') Date: #{message.timestamp}
             div
               h2(class='message-title') Title: #{message.title}

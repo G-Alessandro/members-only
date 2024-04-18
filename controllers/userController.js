@@ -37,6 +37,7 @@ exports.home_page_post = [
       try {
         const message = new Message({
           userId: req.user.id,
+          author: req.user.username,
           title: he.decode(req.body.title),
           timestamp: new Date(),
           text: he.decode(req.body.message),
@@ -140,6 +141,7 @@ exports.dashboard_post = [
       try {
         const message = new Message({
           userId: req.user.id,
+          author: req.user.username,
           title: he.decode(req.body.title),
           timestamp: new Date(),
           text: he.decode(req.body.message),

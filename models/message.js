@@ -4,6 +4,9 @@ const { Schema } = mongoose;
 
 const MessageSchema = new Schema({
   userId: { type: Schema.Types.Mixed },
+  author: {
+    type: String,
+  },
   title: {
     type: String, minLength: 1, maxLength: 30, required: true,
   },
