@@ -1,21 +1,23 @@
 extend layout
 
 block content
-  form(action="" method="POST")
+  div(class='sign-up-form-container')
+    h1 Sign-up
+    form(action="" method="POST" class='sign-up-form')
 
-    label(for="first-name") First Name
-    input(type="text" id="first-name" name="first-name" minLength='1' maxLength='30' required)
+      label(for="first-name") First Name
+      input(type="text" id="first-name" name="first-name" minLength='1' maxLength='30' autocomplete="on" required)
 
-    label(for="last-name") Last Name
-    input(type="text" id="last-name" name="last-name" minLength='1' maxLength='30' required)
+      label(for="last-name") Last Name
+      input(type="text" id="last-name" name="last-name" minLength='1' maxLength='30' autocomplete="on" required)
 
-    label(for="username") Username
-    input(type="text" id="username" name="username" minLength='1' maxLength='100' required)
+      label(for="username") Username
+      input(type="text" id="username" name="username" minLength='1' maxLength='100' autocomplete="on" required)
 
-    label(for="password") Password
-    input(type="password" id="password" name="password" minLength='8' maxLength='16' required)
+      label(for="password") Password
+      input(type="password" id="password" name="password" minLength='8' maxLength='16' autocomplete="off" required)
 
-    label(for="confirm-password") Confirm Password
-    input(type="password" id="confirm-password" name="confirm-password" minLength='8' maxLength='16' required)
+      label(for="confirm-password") Confirm Password
+      input(type="password" id="confirm-password" name="confirm-password" minLength='8' maxLength='16' autocomplete="off" required)
 
-    button(type="submit") Done
+      button(type="submit") Done

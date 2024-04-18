@@ -4,18 +4,25 @@ html
     title= 'Member Only'
     link(rel='stylesheet', href='/stylesheets/layout.css')
     link(rel='stylesheet', href='/stylesheets/index.css')
+    link(rel='stylesheet', href='/stylesheets/membership_form.css')
+    link(rel='stylesheet', href='/stylesheets/become_admin_form.css')
+    link(rel='stylesheet', href='/stylesheets/sign_in_form.css')
+    link(rel='stylesheet', href='/stylesheets/sign_up_form.css')
+    link(rel='stylesheet', href='/stylesheets/dashboard.css')
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
   body
     div(class='top-bar')
-      a(href="/") Home
-      a(href='/membership') Become A Member
-      a(href='/become-admin') Become An Admin
-      if(currentUser)
-        a(href="dashboard") Dashboard
-        a(href="/log-out") Log Out
-      else
-        a(href="/sign-in") Sign In
-        a(href="/sign-up") Sign Up
+      div(class='links-member-admin-container')
+        a(href='/membership') Become a member
+        a(href='/become-admin') Become an admin
+      div(class='user-links-container')
+        a(href="/") Home
+        if(currentUser)
+          a(href="dashboard") Dashboard
+          a(href="/log-out") Log Out
+        else
+          a(href="/sign-in") Sign In
+          a(href="/sign-up") Sign Up
 
     block content

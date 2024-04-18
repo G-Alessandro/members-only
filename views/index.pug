@@ -1,32 +1,35 @@
 extends layout
 
 block content
-  div
-    if (currentUser)
+  div(class='home-container')
+      div(class='form-container')
+        if (currentUser)
 
-      form(action="" method='post')
-      
-        label(for="title") Title:
-        input(type="text" id='title' name='title' minLength='1' maxLength='30' pattern="[a-zA-Z0-9]+" required)
+          form(action="" method='post')
+            div 
+              label(for="title") Title:
+              input(type="text" id='title' name='title' minLength='1' maxLength='30' pattern="[a-zA-Z0-9]+" required)
+            div 
+              label(for="message") Message:
+              textarea(name="message" cols="30" rows="6" minLength='1' required)
 
-        label(for="message") Message:
-        textarea(name="message" cols="30" rows="10" minLength='1' required)
+            button(type="submit") Create a new message
 
-        button(type="submit") Create A New Message
+        else
+          a(href="/sign-in" class='login-link') Click here to log-in and write a message!
 
-    else
-      a(href="/sign-in") Log In to be able to write a message
-
-    div
-      each message in messages 
-        div
-          if(currentUser && currentUser.memberStatus)
+      div(class='messages-container')
+        each message in messages 
+          div(class='message')
+            if(currentUser && currentUser.memberStatus || currentUser && currentUser.isAdmin || currentUser && currentUser.id === message.userId)
+              div
+                h2 Author: #{message.username}
+                p(class='message-date') Date: #{message.timestamp}
             div
-              h2 Author: #{currentUser.username}
-              p Date: #{message.timestamp}
-          div
-            h2 Title: #{message.title}
-          div
-            p #{message.text}
-        if(currentUser && currentUser.isAdmin || currentUser && currentUser.id === message.userId)
-          a(href=`/delete-message/${message._id}?fromPage=home`) Delete
+              h2(class='message-title') Title: #{message.title}
+            div
+              p #{message.text}
+            if(currentUser && currentUser.isAdmin || currentUser && currentUser.id === message.userId)
+              div(class='delete-message-container')
+                a(href=`/delete-message/${message._id}?fromPage=home`) Delete
+                img(src="images/trash-can.svg", alt="trash can")

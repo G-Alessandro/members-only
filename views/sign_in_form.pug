@@ -1,9 +1,11 @@
 extend layout
 
 block content
-  form(action="/sign-in" method='POST')
-    label(for="username") Username
-    input(type="text" id='username' name='username')
-    label(for="password") Password
-    input(type="password" id='password' name='password')
-    button(type="submit") Done
+  div(class='sign-in-form-container')
+    h1 Sign-in
+    form(action="/sign-in" method='POST' class='sign-in-form')
+      label(for="username") Username
+      input(type="text" id='username' name='username' autocomplete="on")
+      label(for="password") Password
+      input(type="password" id='password' name='password' autocomplete="off")
+      button(type="submit") Done

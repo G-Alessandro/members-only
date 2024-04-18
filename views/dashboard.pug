@@ -1,27 +1,46 @@
 extend layout
 
 block content
-  h1 DASHBOARD
-  div
-    div
-      form(action="" method='post')
-        
-        label(for="title") Title:
-        input(type="text" id='title' name='title' minLength='1' maxLength='30' required)
+  div(class='dashboard-container')
 
-        label(for="message") Message:
-        textarea(name="message" cols="30" rows="10" minLength='1' required)
+    h1 DASHBOARD
 
-        button(type="submit") Create A New Message
+    div(class='user-privilege-container')
+      div
+        p Member:
+        if (currentUser.memberStatus)
+          img(src="images/check-mark.svg", alt="check mark")
+        else
+          img(src="images/cancel-mark.svg", alt="cancel mark")
+      div
+        p Admin:
+        if (currentUser.isAdmin)
+          img(src="images/check-mark.svg", alt="check mark")
+        else
+          img(src="images/cancel-mark.svg", alt="cancel mark")
 
-    div
-      each message in userMessages 
-        div
+    div(class='dashboard-form-messages-container')
+      div(class='dashboard-form-container')
+        form(action="" method='post')
           div
-            h2 Author: #{currentUser.username}
-            p Date: #{message.timestamp}
+            label(for="title") Title:
+            input(type="text" id='title' name='title' minLength='1' maxLength='30' required)
           div
-            h2 Title: #{message.title}
-          div
-            p #{message.text}
-        a(href=`/delete-message/${message._id}?fromPage=dashboard`) Delete
+            label(for="message") Message:
+            textarea(name="message" cols="30" rows="10" minLength='1' required)
+
+          button(type="submit") Create A New Message
+
+      div(class='dashboard-messages-container')
+        each message in userMessages 
+          div(class='dashboard-message')
+            div
+              h2 Author: #{currentUser.username}
+              p(class='dashboard-message-date') Date: #{message.timestamp}
+            div
+              h2(class='dashboard-message-title') Title: #{message.title}
+            div
+              p #{message.text}
+            div(class='dashboard-delete-message-container')
+              a(href=`/delete-message/${message._id}?fromPage=dashboard`) Delete
+              img(src="images/trash-can.svg", alt="trash can")

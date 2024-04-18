@@ -32,7 +32,6 @@ router.get('/log-out', user_controller.log_out_get);
 
 router.get('/delete-message/:messageId', user_controller.delete_message_get);
 
-
 router.get('/error', user_controller.error_get);
 
 module.exports = router;

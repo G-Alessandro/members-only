@@ -1,20 +1,23 @@
 extend layout
 
 block content
+  div(class='membership-container')
+    if (!currentUser)
+    
+      a(href="/sign-in" class='login-link') Click here to log-in and become a member!
 
-  if (!currentUser)
-  
-    a(href="/sign-in") Log In to be able to become a member 
+    else 
+      if(currentUser.memberStatus)
+        div(class='already-message')
+          img(src="/images/party-popper-left.svg", alt="party-popper" class='party-popper')
+          h1 Good news, you are already a member!
+          img(src="/images/party-popper-right.svg", alt="party-popper" class='party-popper')
 
-  else 
-    if(currentUser.memberStatus)
-
-      h1 Good news, you are already a member!
-
-    else
-      h2 Want to become a member ?
-      h2 Answer the following riddle :
-      h3 Who are man's best friends?
-      form(action="" method='post') 
-        input(type="text" id='secret-passcode' name='secret-passcode' required)
-        button(type="submit") Done
+      else
+        div(class='passcode-container')
+          h2 Want to become a member ?
+          h3 Answer the following riddle :
+          h3 Who are man's best friends?
+          form(action="" method='post') 
+            input(type="text" id='secret-passcode' name='secret-passcode' class='passcode-input' required)
+            button(type="submit" class='secret-passcode-btn') Done

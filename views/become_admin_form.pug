@@ -1,19 +1,22 @@
 extend layout
 
 block content
+  div(class='admin-container')
+    if (!currentUser)
+    
+      a(href="/sign-in" class='login-link') Click here to log-in and become an admin!
 
-  if (!currentUser)
-  
-    a(href="/sign-in") Log In to be able to become an Admin
+    else 
+      if(currentUser.isAdmin)
+        div(class='already-message')
+          img(src="/images/party-popper-left.svg", alt="party-popper" class='party-popper')
+          h1 Good news, you are already an admin!
+          img(src="/images/party-popper-right.svg", alt="party-popper" class='party-popper')
 
-  else 
-    if(currentUser.isAdmin)
-
-      h1 Good news, you are already an Admin!
-
-    else
-      h2 Want to become an Admin?
-      h2 Guess the passcode and you will become one!
-      form(action="" method='post') 
-        input(type="text" id='admin-secret-passcode' name='admin-secret-passcode' required)
-        button(type="submit") Done
+      else
+        div(class='passcode-container')
+          h2 Want to become an Admin?
+          h3 Guess the passcode and you will become one!
+          form(action="" method='post') 
+            input(type="text" id='admin-secret-passcode' name='admin-secret-passcode' class='passcode-input' required)
+            button(type="submit"  class='secret-passcode-btn') Done

@@ -1,16 +1,43 @@
-.home-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.dashboard-container {
+  display: flex;
   flex-direction: column;
   margin-top: 20px;
 }
 
-.form-container {
+.dashboard-container>h1 {
+  align-self: center;
+}
+
+.user-privilege-container {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 40px;
+}
+
+.user-privilege-container>div {
+  display: flex;
+}
+
+.user-privilege-container>div>img {
+  width: 20px;
+  margin-left: 5px;
+}
+
+.dashboard-form-messages-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-direction: column;
+}
+
+.dashboard-form-container {
   display: flex;
   justify-content: center;
 }
 
-.form-container>form {
+.dashboard-form-container>form {
   position: fixed;
   width: 500px;
   height: fit-content;
@@ -23,19 +50,19 @@
   border: 2px solid rgb(0, 164, 0);
 }
 
-.form-container>form>div {
+.dashboard-form-container>form>div {
   display: flex;
   flex-direction: column;
 }
 
-.form-container>form>div>label {
+.dashboard-form-container>form>div>label {
   font-size: 20px;
   font-weight: 700;
   margin: 8px 0px 3px;
 }
 
-.form-container>form>div>input,
-.form-container>form>div>textarea {
+.dashboard-form-container>form>div>input,
+.dashboard-form-container>form>div>textarea {
   width: 450px;
   font-size: 20px;
   border: 2px solid rgb(0, 164, 0);
@@ -43,18 +70,18 @@
   padding: 5px;
 }
 
-.form-container>form>div>textarea {
+.dashboard-form-container>form>div>textarea {
   resize: none;
 }
 
-.form-container>form>div>input:focus,
-.form-container>form>div>textarea:focus {
+.dashboard-form-container>form>div>input:focus,
+.dashboard-form-container>form>div>textarea:focus {
   outline: none;
   border: 2px solid rgb(0, 206, 228);
 }
 
 
-.form-container>form>button {
+.dashboard-form-container>form>button {
   width: fit-content;
   color: white;
   font-size: 17px;
@@ -67,35 +94,18 @@
   transition: transform .2s;
 }
 
-.form-container>form>button:hover {
+.dashboard-form-container>form>button:hover {
   transform:scale(1.1);
 }
 
-.login-link {
-  position: fixed;
-  height: fit-content;
-  color: white;
-  font-size: 20px;
-  font-weight: 700;
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #29e86f;
-  border-radius: 5px;
-  transition: transform .2s;
-}
-
-.login-link:hover {
-  transform:scale(1.1);
-}
-
-.messages-container {
+.dashboard-messages-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding-bottom: 10px;
 }
 
-.message {
+.dashboard-message {
   display: flex;
   flex-direction: column;
   width: 500px;
@@ -106,17 +116,17 @@
   border-radius: 5px;
 }
 
-.message-date {
+.dashboard-message-date {
   font-size: 15px;
   margin: 8px 0px;
 }
 
-.message-title {
+.dashboard-message-title {
   font-size: 18px;
   margin: 10px 0px;
 }
 
-.delete-message-container {
+.dashboard-delete-message-container {
   display: flex;
   width: fit-content;
   align-self: flex-end;
@@ -127,13 +137,13 @@
   border-radius: 5px;
 }
 
-.delete-message-container>a {
+.dashboard-delete-message-container>a {
   color: white;
   font-size: 18px;
   font-weight: 700;
   margin-right: 5px;
 }
 
-.delete-message-container>img {
+.dashboard-delete-message-container>img {
   width: 20px;
 }
