@@ -1,7 +1,6 @@
 .home-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  flex-direction: column;
   margin-top: 20px;
 }
 
@@ -12,15 +11,14 @@
 
 .form-container>form {
   position: fixed;
-  width: 500px;
   height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #d5fde4;
-  padding: 5px 0px;
   border-radius: 5px;
   border: 2px solid rgb(0, 164, 0);
+  padding: 15px;
 }
 
 .form-container>form>div {
@@ -36,7 +34,7 @@
 
 .form-container>form>div>input,
 .form-container>form>div>textarea {
-  width: 450px;
+  width: 500px;
   font-size: 20px;
   border: 2px solid rgb(0, 164, 0);
   border-radius: 5px;
@@ -45,6 +43,7 @@
 
 .form-container>form>div>textarea {
   resize: none;
+  height: 300px;
 }
 
 .form-container>form>div>input:focus,
@@ -98,7 +97,7 @@
 .message {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  max-width: 500px;
   margin-bottom: 10px;
   padding: 15px 15px;
   border: 2px solid rgb(0, 164, 0);
@@ -136,4 +135,40 @@
 
 .delete-message-container>img {
   width: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+  }
+
+  .form-container>form {
+    position: static;
+    padding: 5px;
+    margin-top: 10px;
+  }
+
+  .form-container>form>div>input,
+  .form-container>form>div>textarea {
+    width: 280px;
+  }
+
+  .form-container>form>div>textarea {
+    resize: none;
+    height: 150px;
+  }
+
+  .login-link {
+    position:static;
+    margin: 2px 5px;
+    padding: 5px;
+    border: 2px solid rgb(10, 183, 13);
+  }
+
+  .messages-container {
+    padding: 0px 5px;
+    margin-top: 20px;
+  }
 }

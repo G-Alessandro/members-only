@@ -48,3 +48,14 @@
 .sign-in-form>button:hover {
   transform:scale(1.1);
 }
+
+@media screen and (max-width: 500px) {
+
+  .sign-in-form-container {
+    margin-top:5px;
+  }
+
+  .sign-in-form {
+    padding: 5px 15px;
+  }
+}

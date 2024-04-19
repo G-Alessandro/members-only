@@ -44,3 +44,31 @@ body {
 .user-links-container>a:hover {
   border-bottom: 4px solid white;
 }
+
+@media screen and (max-width: 500px) {
+  .top-bar {
+    flex-direction: column-reverse;
+    gap: 10px;
+    padding: 5px;
+  }
+  
+  .links-member-admin-container,
+  .user-links-container {
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  .links-member-admin-container>a,
+  .user-links-container>a {
+    font-size: 25px;
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 5px;
+  }
+
+  .links-member-admin-container>a:hover,
+  .user-links-container>a:hover {
+    border-bottom: 2px solid white;
+  } 
+}

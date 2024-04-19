@@ -4,19 +4,19 @@ block content
   div(class='admin-container')
     if (!currentUser)
     
-      a(href="/sign-in" class='login-link') Click here to log-in and become an admin!
+      a(href="/sign-in" class='become-admin-login-link') Click here to log-in and become an admin!
 
     else 
       if(currentUser.isAdmin)
-        div(class='already-message')
-          img(src="/images/party-popper-left.svg", alt="party-popper" class='party-popper')
+        div(class='become-admin-already-message')
+          img(src="/images/party-popper-left.svg", alt="party-popper" class='become-admin-party-popper')
           h1 Good news, you are already an admin!
-          img(src="/images/party-popper-right.svg", alt="party-popper" class='party-popper')
+          img(src="/images/party-popper-right.svg", alt="party-popper" class='become-admin-party-popper')
 
       else
-        div(class='passcode-container')
+        div(class='become-admin-passcode-container')
           h2 Want to become an Admin?
           h3 Guess the passcode and you will become one!
           form(action="" method='post') 
-            input(type="text" id='admin-secret-passcode' name='admin-secret-passcode' class='passcode-input' required)
-            button(type="submit"  class='secret-passcode-btn') Done
+            input(type="text" id='admin-secret-passcode' name='become-admin-admin-secret-passcode' class='become-admin-passcode-input' required)
+            button(type="submit"  class='become-admin-secret-passcode-btn') Done

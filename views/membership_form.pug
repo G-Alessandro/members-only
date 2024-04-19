@@ -4,20 +4,20 @@ block content
   div(class='membership-container')
     if (!currentUser)
     
-      a(href="/sign-in" class='login-link') Click here to log-in and become a member!
+      a(href="/sign-in" class='membership-login-link') Click here to log-in and become a member!
 
     else 
       if(currentUser.memberStatus)
-        div(class='already-message')
-          img(src="/images/party-popper-left.svg", alt="party-popper" class='party-popper')
+        div(class='membership-already-message')
+          img(src="/images/party-popper-left.svg", alt="party-popper" class='membership-party-popper')
           h1 Good news, you are already a member!
-          img(src="/images/party-popper-right.svg", alt="party-popper" class='party-popper')
+          img(src="/images/party-popper-right.svg", alt="party-popper" class='membership-party-popper')
 
       else
-        div(class='passcode-container')
+        div(class='membership-passcode-container')
           h2 Want to become a member ?
           h3 Answer the following riddle :
           h3 Who are man's best friends?
           form(action="" method='post') 
-            input(type="text" id='secret-passcode' name='secret-passcode' class='passcode-input' required)
-            button(type="submit" class='secret-passcode-btn') Done
+            input(type="text" id='secret-passcode' name='secret-passcode' class='membership-passcode-input' required)
+            button(type="submit" class='membership-secret-passcode-btn') Done
