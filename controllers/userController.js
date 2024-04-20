@@ -189,9 +189,9 @@ exports.become_admin_form_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.become_admin_form_post = [
-  body('admin-secret-passcode').trim().escape(),
+  body('become-admin-secret-passcode').trim().escape(),
   asyncHandler(async (req, res, next) => {
-    const adminSecretPasscode = req.body['admin-secret-passcode'].toLowerCase();
+    const adminSecretPasscode = req.body['become-admin-secret-passcode'];
     if (adminSecretPasscode === process.env.ADMIN_PASSCODE) {
       await User.findOneAndUpdate({ _id: req.user.id }, { isAdmin: true }).exec();
       res.redirect('/dashboard');
