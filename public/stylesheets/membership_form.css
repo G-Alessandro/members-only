@@ -73,6 +73,11 @@
   padding: 5px;
 }
 
+.membership-passcode-input:focus {
+  outline: none;
+  border: 2px solid rgb(0, 206, 228);
+}
+
 .membership-secret-passcode-btn {
   width: fit-content;
   color: white;
