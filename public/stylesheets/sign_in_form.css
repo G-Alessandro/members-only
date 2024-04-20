@@ -33,6 +33,11 @@
   padding: 5px;
 }
 
+.sign-in-form>input:focus {
+  outline: none;
+  border: 2px solid rgb(0, 206, 228);
+}
+
 .sign-in-form>button {
   width: fit-content;
   color: white;
